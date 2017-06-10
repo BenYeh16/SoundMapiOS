@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5E10C4691EE7EC4500E76AFB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */; };
 		5E10C46B1EE8208800E76AFB /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10C46A1EE8208800E76AFB /* SignupViewController.swift */; };
+		5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */; };
+		5E7BF6401EEC17320049C2C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */; };
 		E0E954BC1EE7D82B009913B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E954BB1EE7D82B009913B5 /* AppDelegate.swift */; };
 		E0E954BE1EE7D82B009913B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E954BD1EE7D82B009913B5 /* ViewController.swift */; };
 		E0E954C11EE7D82B009913B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0E954BF1EE7D82B009913B5 /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E10C46A1EE8208800E76AFB /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E0E954B81EE7D82B009913B5 /* SoundMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E954BB1EE7D82B009913B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0E954BD1EE7D82B009913B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				E0E954BB1EE7D82B009913B5 /* AppDelegate.swift */,
 				E0E954BD1EE7D82B009913B5 /* ViewController.swift */,
 				E0E954BF1EE7D82B009913B5 /* Main.storyboard */,
+				5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */,
+				5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */,
 				E0E954C51EE7D82B009913B5 /* Assets.xcassets */,
 				E0E954C71EE7D82B009913B5 /* LaunchScreen.storyboard */,
 				E0E954CA1EE7D82B009913B5 /* Info.plist */,
@@ -269,8 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E10C4691EE7EC4500E76AFB /* LoginViewController.swift in Sources */,
+				5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */,
 				E0E954BE1EE7D82B009913B5 /* ViewController.swift in Sources */,
 				5E10C46B1EE8208800E76AFB /* SignupViewController.swift in Sources */,
+				5E7BF6401EEC17320049C2C6 /* TabBarController.swift in Sources */,
 				E0E954C41EE7D82B009913B5 /* SoundMap.xcdatamodeld in Sources */,
 				E0E954BC1EE7D82B009913B5 /* AppDelegate.swift in Sources */,
 			);
