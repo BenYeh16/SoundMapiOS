@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0A4A6391EE7DBEF00E41206 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A6381EE7DBEF00E41206 /* Profile.swift */; };
+		E0A4A63B1EE7DC1D00E41206 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */; };
+		E0A4A63F1EE7E6DF00E41206 /* audiofile.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0A4A63C1EE7E6DF00E41206 /* audiofile.mp3 */; };
+		E0A4A6401EE7E6DF00E41206 /* audioplayer_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A4A63D1EE7E6DF00E41206 /* audioplayer_pause.png */; };
+		E0A4A6411EE7E6DF00E41206 /* audioplayer_play.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A4A63E1EE7E6DF00E41206 /* audioplayer_play.png */; };
+		E0A4A64A1EE7E74000E41206 /* tex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0A4A6471EE7E74000E41206 /* tex.jpg */; };
+		E0A4A64C1EE7E9F900E41206 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A64B1EE7E9F900E41206 /* AudioPlayer.swift */; };
+		E0A4A6501EE7EBC800E41206 /* TestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A64F1EE7EBC800E41206 /* TestTableViewController.swift */; };
+		E0A4A6521EE7EF5200E41206 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A6511EE7EF5200E41206 /* ProfileViewController.swift */; };
 		5E10C4691EE7EC4500E76AFB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */; };
 		5E10C46B1EE8208800E76AFB /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10C46A1EE8208800E76AFB /* SignupViewController.swift */; };
 		5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */; };
@@ -39,6 +48,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E0A4A6381EE7DBEF00E41206 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E0A4A63C1EE7E6DF00E41206 /* audiofile.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audiofile.mp3; sourceTree = "<group>"; };
+		E0A4A63D1EE7E6DF00E41206 /* audioplayer_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audioplayer_pause.png; sourceTree = "<group>"; };
+		E0A4A63E1EE7E6DF00E41206 /* audioplayer_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audioplayer_play.png; sourceTree = "<group>"; };
+		E0A4A6471EE7E74000E41206 /* tex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tex.jpg; sourceTree = "<group>"; };
+		E0A4A64B1EE7E9F900E41206 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		E0A4A64F1EE7EBC800E41206 /* TestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewController.swift; sourceTree = "<group>"; };
+		E0A4A6511EE7EF5200E41206 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E10C46A1EE8208800E76AFB /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -107,15 +125,24 @@
 		E0E954BA1EE7D82B009913B5 /* SoundMap */ = {
 			isa = PBXGroup;
 			children = (
+				E0A4A6471EE7E74000E41206 /* tex.jpg */,
+				E0A4A63C1EE7E6DF00E41206 /* audiofile.mp3 */,
+				E0A4A63D1EE7E6DF00E41206 /* audioplayer_pause.png */,
+				E0A4A63E1EE7E6DF00E41206 /* audioplayer_play.png */,
 				E0E954BB1EE7D82B009913B5 /* AppDelegate.swift */,
 				E0E954BD1EE7D82B009913B5 /* ViewController.swift */,
 				E0E954BF1EE7D82B009913B5 /* Main.storyboard */,
 				5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */,
 				5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */,
+				E0A4A64F1EE7EBC800E41206 /* TestTableViewController.swift */,
 				E0E954C51EE7D82B009913B5 /* Assets.xcassets */,
 				E0E954C71EE7D82B009913B5 /* LaunchScreen.storyboard */,
 				E0E954CA1EE7D82B009913B5 /* Info.plist */,
 				E0E954C21EE7D82B009913B5 /* SoundMap.xcdatamodeld */,
+				E0A4A6381EE7DBEF00E41206 /* Profile.swift */,
+				E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */,
+				E0A4A64B1EE7E9F900E41206 /* AudioPlayer.swift */,
+				E0A4A6511EE7EF5200E41206 /* ProfileViewController.swift */,
 				5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */,
 				5E10C46A1EE8208800E76AFB /* SignupViewController.swift */,
 			);
@@ -208,6 +235,7 @@
 				TargetAttributes = {
 					E0E954B71EE7D82B009913B5 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					E0E954CE1EE7D82B009913B5 = {
@@ -247,8 +275,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0A4A64A1EE7E74000E41206 /* tex.jpg in Resources */,
 				E0E954C91EE7D82B009913B5 /* LaunchScreen.storyboard in Resources */,
+				E0A4A6411EE7E6DF00E41206 /* audioplayer_play.png in Resources */,
+				E0A4A63F1EE7E6DF00E41206 /* audiofile.mp3 in Resources */,
 				E0E954C61EE7D82B009913B5 /* Assets.xcassets in Resources */,
+				E0A4A6401EE7E6DF00E41206 /* audioplayer_pause.png in Resources */,
 				E0E954C11EE7D82B009913B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,10 +309,15 @@
 				5E10C4691EE7EC4500E76AFB /* LoginViewController.swift in Sources */,
 				5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */,
 				E0E954BE1EE7D82B009913B5 /* ViewController.swift in Sources */,
+				E0A4A6391EE7DBEF00E41206 /* Profile.swift in Sources */,
 				5E10C46B1EE8208800E76AFB /* SignupViewController.swift in Sources */,
 				5E7BF6401EEC17320049C2C6 /* TabBarController.swift in Sources */,
 				E0E954C41EE7D82B009913B5 /* SoundMap.xcdatamodeld in Sources */,
+				E0A4A63B1EE7DC1D00E41206 /* TableViewController.swift in Sources */,
 				E0E954BC1EE7D82B009913B5 /* AppDelegate.swift in Sources */,
+				E0A4A6521EE7EF5200E41206 /* ProfileViewController.swift in Sources */,
+				E0A4A64C1EE7E9F900E41206 /* AudioPlayer.swift in Sources */,
+				E0A4A6501EE7EBC800E41206 /* TestTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,10 +471,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SoundMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cnl4.SoundMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -446,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SoundMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cnl4.SoundMap;
