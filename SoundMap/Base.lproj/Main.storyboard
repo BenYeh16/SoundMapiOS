@@ -187,7 +187,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2:56" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jda-s1-47V" userLabel="timeElapsed">
-                                <rect key="frame" x="73" y="422" width="34" height="21"/>
+                                <rect key="frame" x="69" y="422" width="38" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.36078431372549019" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
@@ -197,6 +197,9 @@
                                 <rect key="frame" x="105" y="417" width="147" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="thumbTintColor" red="0.23529411764705882" green="0.36078431372549019" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="slide:" destination="N5T-jp-oKM" eventType="valueChanged" id="pAo-79-VkR"/>
+                                </connections>
                             </slider>
                             <button autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTq-Op-56L" userLabel="audioPlayButton">
                                 <rect key="frame" x="30" y="414" width="37" height="37"/>
@@ -211,7 +214,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-0:37" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkL-5x-6kP" userLabel="timeDuration">
-                                <rect key="frame" x="258" y="422" width="32" height="21"/>
+                                <rect key="frame" x="258" y="422" width="36" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.36078431372549019" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
@@ -253,6 +256,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Lnz-wu-lv5"/>
                     <connections>
+                        <outlet property="audioCurrent" destination="jda-s1-47V" id="cSW-Sc-vIJ"/>
+                        <outlet property="audioSlider" destination="hHN-kt-4iL" id="sKL-mP-dVh"/>
+                        <outlet property="audioTime" destination="IkL-5x-6kP" id="SlE-5w-uuP"/>
                         <outlet property="playButton" destination="ZTq-Op-56L" id="KEi-VI-Oyp"/>
                         <outlet property="profileImage" destination="Alm-nv-qHZ" id="wL5-lD-wKs"/>
                         <outlet property="uploadButton" destination="fZ0-1d-vLa" id="yTb-5Q-Lto"/>
