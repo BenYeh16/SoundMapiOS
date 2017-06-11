@@ -150,7 +150,7 @@
         <scene sceneID="S8X-ZU-ciz">
             <objects>
                 <navigationController id="0i1-3K-Rjj" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gt7-uO-Xgw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gt7-uO-Xgw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.2156862745" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -268,6 +268,7 @@
                     </view>
                     <connections>
                         <outlet property="playButton" destination="ZTq-Op-56L" id="4XC-Kz-Ids"/>
+                        <outlet property="profileImage" destination="WPD-RU-qU7" id="ck5-kn-DHD"/>
                         <outlet property="userName" destination="kVl-mr-Un2" id="8eY-eR-MzX"/>
                     </connections>
                 </viewController>
