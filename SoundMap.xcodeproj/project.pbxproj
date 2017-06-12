@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E10C4691EE7EC4500E76AFB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */; };
 		5E10C46B1EE8208800E76AFB /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10C46A1EE8208800E76AFB /* SignupViewController.swift */; };
+		5E18437F1EEE4844006CE6D3 /* RecordInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */; };
 		5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */; };
 		5E7BF6401EEC17320049C2C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */; };
 		E0A4A63B1EE7DC1D00E41206 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E10C46A1EE8208800E76AFB /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordInfoViewController.swift; sourceTree = "<group>"; };
 		5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				E0E954BB1EE7D82B009913B5 /* AppDelegate.swift */,
 				E0E954BD1EE7D82B009913B5 /* ViewController.swift */,
 				E0E954BF1EE7D82B009913B5 /* Main.storyboard */,
+				5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */,
 				5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */,
 				5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */,
 				E0E954C51EE7D82B009913B5 /* Assets.xcassets */,
@@ -309,6 +312,7 @@
 				E0E954C41EE7D82B009913B5 /* SoundMap.xcdatamodeld in Sources */,
 				E0A4A63B1EE7DC1D00E41206 /* TableViewController.swift in Sources */,
 				E0E954BC1EE7D82B009913B5 /* AppDelegate.swift in Sources */,
+				5E18437F1EEE4844006CE6D3 /* RecordInfoViewController.swift in Sources */,
 				E0A4A6521EE7EF5200E41206 /* ProfileViewController.swift in Sources */,
 				E0A4A64C1EE7E9F900E41206 /* AudioPlayer.swift in Sources */,
 			);

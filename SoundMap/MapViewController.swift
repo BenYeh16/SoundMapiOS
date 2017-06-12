@@ -84,7 +84,6 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     func setupData() {
         // 1. 檢查系統是否能夠監視 region
         if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
