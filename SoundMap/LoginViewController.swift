@@ -48,12 +48,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         animateViewMoving(up: true, moveValue: -50)
     }
     
-    // Allow return to finish
+    // Allow RETURN to hide keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    // Implement move textfield
     func animateViewMoving (up: Bool, moveValue: CGFloat){
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)

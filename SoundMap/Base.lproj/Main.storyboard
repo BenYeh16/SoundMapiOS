@@ -426,7 +426,7 @@
                                 <rect key="frame" x="40" y="134" width="240" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNk-1f-OwG">
-                                        <rect key="frame" x="72" y="15" width="96.5" height="24"/>
+                                        <rect key="frame" x="72" y="15" width="97" height="24"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Sound Info">
                                                 <attributes>
@@ -478,43 +478,75 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0b4-xi-4mf">
-                                        <rect key="frame" x="24" y="59" width="38" height="20.5"/>
+                                        <rect key="frame" x="24" y="59" width="38" height="21"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="roundedRect" placeholder="My Sound" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xbi-NI-h10">
-                                        <rect key="frame" x="74" y="54" width="142" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="roundedRect" placeholder="My Sound" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xbi-NI-h10">
+                                        <rect key="frame" x="74" y="54" width="98" height="30"/>
                                         <attributedString key="attributedText"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCZ-X0-vxS">
-                                        <rect key="frame" x="24" y="119" width="192" height="106"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bas-Zk-cK8">
-                                        <rect key="frame" x="24" y="93.5" width="92.5" height="20.5"/>
+                                        <rect key="frame" x="24" y="94" width="93" height="21"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ig2-8f-2Uk">
+                                        <rect key="frame" x="24" y="120" width="192" height="105"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="363-QU-kMd">
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="105"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MCZ-X0-vxS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="105"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="105" id="0Cg-ia-98c"/>
+                                                            <constraint firstAttribute="width" constant="192" id="vaO-ZE-haL"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                <real key="value" value="0.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="6"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="192" id="2hz-T3-4nb"/>
+                                                    <constraint firstItem="MCZ-X0-vxS" firstAttribute="leading" secondItem="363-QU-kMd" secondAttribute="leading" id="QTV-bg-82a"/>
+                                                    <constraint firstAttribute="height" constant="105" id="bEB-9h-rv3"/>
+                                                    <constraint firstItem="MCZ-X0-vxS" firstAttribute="top" secondItem="363-QU-kMd" secondAttribute="top" id="dUm-MT-Uoq"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MCZ-X0-vxS" secondAttribute="trailing" id="g6u-Xa-mDv"/>
+                                                    <constraint firstAttribute="bottom" secondItem="MCZ-X0-vxS" secondAttribute="bottom" id="kE4-zh-T41"/>
+                                                </constraints>
+                                            </scrollView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="363-QU-kMd" secondAttribute="bottom" id="Fq7-L0-yT0"/>
+                                            <constraint firstAttribute="trailing" secondItem="363-QU-kMd" secondAttribute="trailing" id="L2K-Ou-57X"/>
+                                            <constraint firstItem="363-QU-kMd" firstAttribute="top" secondItem="Ig2-8f-2Uk" secondAttribute="top" id="WUG-RD-Rk5"/>
+                                            <constraint firstItem="363-QU-kMd" firstAttribute="leading" secondItem="Ig2-8f-2Uk" secondAttribute="leading" id="aet-WV-OK7"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Ig2-8f-2Uk" firstAttribute="trailing" secondItem="uLm-O9-apQ" secondAttribute="trailing" id="1B0-OM-vwg"/>
                                     <constraint firstItem="0b4-xi-4mf" firstAttribute="top" secondItem="wNk-1f-OwG" secondAttribute="bottom" constant="20" id="67X-vt-PVd"/>
+                                    <constraint firstItem="AR9-Ik-zph" firstAttribute="top" secondItem="Ig2-8f-2Uk" secondAttribute="bottom" constant="30" id="9nw-Qt-a1U"/>
                                     <constraint firstAttribute="width" constant="240" id="A6h-qw-fwu"/>
                                     <constraint firstItem="0b4-xi-4mf" firstAttribute="leading" secondItem="cyv-xn-vBg" secondAttribute="leading" constant="24" id="E0b-wl-FBp"/>
+                                    <constraint firstItem="Xbi-NI-h10" firstAttribute="centerY" secondItem="0b4-xi-4mf" secondAttribute="centerY" id="Hso-ak-TNa"/>
+                                    <constraint firstItem="Ig2-8f-2Uk" firstAttribute="leading" secondItem="cyv-xn-vBg" secondAttribute="leading" constant="24" id="HxK-mR-rfL"/>
+                                    <constraint firstItem="Xbi-NI-h10" firstAttribute="leading" secondItem="0b4-xi-4mf" secondAttribute="trailing" constant="12" id="TcV-Bu-eBV"/>
                                     <constraint firstAttribute="height" constant="300" id="Usw-2c-SNq"/>
                                     <constraint firstItem="bas-Zk-cK8" firstAttribute="leading" secondItem="cyv-xn-vBg" secondAttribute="leading" constant="24" id="XvX-xy-qgO"/>
                                     <constraint firstAttribute="bottom" secondItem="AR9-Ik-zph" secondAttribute="bottom" constant="15" id="YCx-17-bTm"/>
@@ -522,6 +554,7 @@
                                     <constraint firstItem="bas-Zk-cK8" firstAttribute="top" secondItem="0b4-xi-4mf" secondAttribute="bottom" constant="14" id="auz-ER-fu2"/>
                                     <constraint firstItem="wNk-1f-OwG" firstAttribute="top" secondItem="cyv-xn-vBg" secondAttribute="top" constant="15" id="byu-jW-uIx"/>
                                     <constraint firstItem="uLm-O9-apQ" firstAttribute="centerX" secondItem="cyv-xn-vBg" secondAttribute="centerX" constant="55" id="fdN-u7-GsZ"/>
+                                    <constraint firstItem="Ig2-8f-2Uk" firstAttribute="top" secondItem="bas-Zk-cK8" secondAttribute="bottom" constant="5" id="nA6-mU-F6O"/>
                                     <constraint firstAttribute="bottom" secondItem="uLm-O9-apQ" secondAttribute="bottom" constant="15" id="nSs-PL-txw"/>
                                     <constraint firstItem="AR9-Ik-zph" firstAttribute="centerX" secondItem="cyv-xn-vBg" secondAttribute="centerX" constant="-55" id="pG6-Vh-d6g"/>
                                 </constraints>
@@ -540,6 +573,7 @@
                         <outlet property="descriptionText" destination="MCZ-X0-vxS" id="aHL-cP-Ntk"/>
                         <outlet property="recordInfoView" destination="cyv-xn-vBg" id="lEF-hW-dOz"/>
                         <outlet property="saveButton" destination="AR9-Ik-zph" id="qN0-5D-r9N"/>
+                        <outlet property="scrollView" destination="363-QU-kMd" id="yKm-Zj-Hre"/>
                         <outlet property="soundInfoLabel" destination="wNk-1f-OwG" id="rkY-aW-39W"/>
                         <outlet property="titleText" destination="Xbi-NI-h10" id="WpA-6p-Te0"/>
                     </connections>
