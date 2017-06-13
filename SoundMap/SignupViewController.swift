@@ -8,17 +8,56 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var userIDTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        userIDTextField.delegate = self
+        passwordTextField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func signUpAction(_ sender: Any) {
+        activityIndicator.startAnimating()
+    }
+    
+    
+    /****** TextField related ******/
+    
+    // Move textfield position to avoid blocked by keyboard
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        animateViewMoving(up: true, moveValue: 50)
+    }
+    
+    // Move textfield back to original position
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        animateViewMoving(up: true, moveValue: -50)
+    }
+    
+    // Allow RETURN to hide keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Implement move textfield
+    func animateViewMoving (up: Bool, moveValue: CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
     
 
