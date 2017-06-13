@@ -359,6 +359,7 @@
                         <segue destination="cm7-qb-dlP" kind="relationship" relationship="viewControllers" id="fXL-6f-0Wq"/>
                         <segue destination="ZkO-u9-cFJ" kind="relationship" relationship="viewControllers" id="E9i-kh-Rdn"/>
                         <segue destination="9k0-1K-HOE" kind="relationship" relationship="viewControllers" id="viL-cj-Imi"/>
+                        <segue destination="UUc-Ft-94U" kind="presentation" identifier="recordPopover" id="3Yq-64-c7R"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZN-Da-I9u" userLabel="First Responder" sceneMemberID="firstResponder"/>

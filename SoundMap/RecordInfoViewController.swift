@@ -18,6 +18,9 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -120,6 +123,11 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     /****** Button action ******/
     @IBAction func saveSound(_ sender: Any) {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let soundFileURL: URL = documentsDirectory.appendingPathComponent("recording-123.m4a")
+        
+        // Close modal
+        print("soundfile url: '\(soundFileURL)'")
         dismiss(animated: true, completion: nil)
     }
     
@@ -137,5 +145,6 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }
