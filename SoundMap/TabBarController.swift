@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TabBarController: UITabBarController, UIPopoverPresentationControllerDelegate {
-    
+    var recorder: AVAudioRecorder!
+    var player:AVAudioPlayer!
+    var recordBtnTappedCount = 0
+    var isRecording = true
     @IBOutlet var recordButton: UIButton!
     //var timer = Timer
     
@@ -18,7 +22,14 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
         setupRecordButton()
         // Do any additional setup after loading the view.
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .allowUserInteraction],
+                       animations: {self.recordButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi) )},
+                       completion: nil)
+        changeState()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,31 +69,19 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
     
     
     @IBAction func record(_ sender: UIButton) {
+        
         self.selectedIndex = 0
         // console print to verify the button works
         print("Record Button was just pressed!")
         
         // Spin
-        UIView.animate(withDuration: 0.5, animations:{
-            sender.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-        })
         
+        if isRecording {
+            changeState()
+        }else{
+            changeState()
+        }
         
-        // get a reference to the view controller for the popover
-        //let popController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "recordPopover")
-        //popController.preferredContentSize = CGSize(width: 300, height: 300)
-
-        // set the presentation style
-        //popController.modalPresentationStyle = UIModalPresentationStyle.popover
-        
-        // set up the popover presentation controller
-        //popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-        //popController.popoverPresentationController?.delegate = self
-        /*popController.popoverPresentationController?.sourceView = sender // button
-        popController.popoverPresentationController?.sourceRect = sender.bounds
-        
-        // present the popover
-        self.present(popController, animated: true, completion: nil)*/
     }
     
    
@@ -122,6 +121,34 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
         popover.sourceRect = CGRectMake(100,100,0,0)
         
         self.present(nav, animated: true, completion: nil)*/
+    }
+    
+    
+    func pauseLayer(layer: CALayer) {
+        let pausedTime: CFTimeInterval = layer.convertTime(CACurrentMediaTime(), from: nil)
+        layer.speed = 0.0
+        layer.timeOffset = pausedTime
+    }
+    
+    func resumeLayer(layer: CALayer) {
+        let pausedTime: CFTimeInterval = layer.timeOffset
+        layer.speed = 1.0
+        layer.timeOffset = 0.0
+        layer.beginTime = 0.0
+        let timeSincePause: CFTimeInterval = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        layer.beginTime = timeSincePause
+    }
+    
+    func changeState() {
+        let layer = recordButton.layer
+        
+        if isRecording {
+            pauseLayer(layer : layer)
+        } else {
+            resumeLayer(layer : layer)
+        }
+        isRecording = !isRecording
+        //self.myLabel.text = "\(isRecording)"
     }
 
 
