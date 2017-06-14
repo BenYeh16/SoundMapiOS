@@ -293,7 +293,7 @@
         <!--Map-->
         <scene sceneID="epe-1N-4cH">
             <objects>
-                <viewController title="Map" id="LE7-ga-mwM" customClass="MapViewController" customModule="SoundMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StoryboardIdentifierMap" title="Map" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LE7-ga-mwM" customClass="MapViewController" customModule="SoundMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q1K-1L-mi9"/>
                         <viewControllerLayoutGuide type="bottom" id="TXP-N1-4Dj"/>

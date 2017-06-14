@@ -36,6 +36,7 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(nowAnnotation)
         
     }
+    
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
     
@@ -56,6 +57,7 @@ class MapViewController: UIViewController {
         // 4. 加入測試數據
         setupData()
         // Do any additional setup after loading the view, typically from a nib.
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.PinBtn(_:)),name:NSNotification.Name(rawValue: "stopSoundNotification"), object: nil)
     }
     
     

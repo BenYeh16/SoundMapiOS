@@ -52,7 +52,7 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
         } else {
             url = self.soundFileURL!
         }
-        print("playing \(url)")
+        print("playing \(url ?? nil)")
         
         do {
             self.player = try AVAudioPlayer(contentsOf: url!)
