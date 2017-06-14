@@ -10,32 +10,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
 
-    
-    
-    
-    @IBAction func PinBtn(_ sender: Any) {
-        currentLocation = locationManager.location!
-        showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
-        
-        
-        longitudeLabel.text = "\(currentLocation.coordinate.longitude)"
-        latitudeLabel.text = "\(currentLocation.coordinate.latitude)"
-        
-        let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
-        mapView.add(circle)
-        
-        let nowAnnotation = MKPointAnnotation()
-        nowAnnotation.coordinate = currentLocation.coordinate;
-        nowAnnotation.title = "Now";
-        mapView.addAnnotation(nowAnnotation)
-        
-    }
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
     
@@ -49,7 +29,7 @@ class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         
         // 3. 配置 mapView
-        mapView.delegate = self as? MKMapViewDelegate
+        mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
         
@@ -75,7 +55,7 @@ class MapViewController: UIViewController {
         else if CLLocationManager.authorizationStatus() == .authorizedAlways {
             locationManager.startUpdatingLocation()
         }
-        currentLocation = locationManager.location!
+        //currentLocation = locationManager.location!
     }
     
     
@@ -106,9 +86,6 @@ class MapViewController: UIViewController {
             let circle = MKCircle(center: coordinate, radius: regionRadius)
             mapView.add(circle)
             
-            
-            
-            
             // 4. 創建大頭釘(annotation)
             let restaurantAnnotation = MKPointAnnotation()
             restaurantAnnotation.coordinate = coordinate;
@@ -123,15 +100,45 @@ class MapViewController: UIViewController {
         }
     }
     
-    
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        let circleRenderer = MKCircleRenderer(overlay: overlay)
-        circleRenderer.strokeColor = UIColor.red
+    // Customize annotation: music icon
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        circleRenderer.lineWidth = 2.0
+        // Don't want to show a custom image if the annotation is the user's location.
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
         
-        return circleRenderer
+        let annotationIdentifier = "AnnotationIdentifier"
+        
+        var annotationView: MKAnnotationView?
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        }
+        else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        if let annotationView = annotationView {
+            // Disable callout, popover will handle
+            annotationView.canShowCallout = false
+            
+            // Resize image
+            let pinImage = UIImage(named: "map-pin")
+            let size = CGSize(width: 40, height: 40)
+            UIGraphicsBeginImageContext(size)
+            pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            annotationView.image = resizedImage
+        }
+        
+        return annotationView
     }
+    
+    
     
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -157,7 +164,57 @@ class MapViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
+    func addPin() {
+        currentLocation = locationManager.location!
+        showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
+        
+        
+        longitudeLabel.text = "\(currentLocation.coordinate.longitude)"
+        latitudeLabel.text = "\(currentLocation.coordinate.latitude)"
+        
+        let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
+        mapView.add(circle)
+        
+        let nowAnnotation = MKPointAnnotation()
+        nowAnnotation.coordinate = currentLocation.coordinate;
+        nowAnnotation.title = "Now";
+        mapView.addAnnotation(nowAnnotation)
+        
+    }
+
     
+    /****** Popover related ******/
+    
+    // UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        // Force popover style
+        return UIModalPresentationStyle.none
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mapPopup" {
+            let destinationVC = segue.destination as! MapPopupViewController
+            
+            // TODO: Get data from server
+            //
+            //
+            
+            // TODO: Pass data
+            destinationVC.tmpOwner = "ChelseaHu"
+            destinationVC.tmpTitle = "MyVoice"
+            destinationVC.tmpDescript = "Listen to my lovely sound"
+            destinationVC.tmpImage = #imageLiteral(resourceName: "music-play")
+            destinationVC.soundURL = "xxx"
+            
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        mapView.deselectAnnotation(view.annotation, animated: true)
+        
+        performSegue(withIdentifier: "mapPopup", sender: nil)
+    }
+
 
     /*
     // MARK: - Navigation

@@ -12,6 +12,7 @@
 		5E18437F1EEE4844006CE6D3 /* RecordInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */; };
 		5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */; };
 		5E7BF6401EEC17320049C2C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */; };
+		5EC0A5981EF0AF900055900E /* MapPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A5971EF0AF900055900E /* MapPopupViewController.swift */; };
 		E0A4A63B1EE7DC1D00E41206 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */; };
 		E0A4A63F1EE7E6DF00E41206 /* audiofile.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0A4A63C1EE7E6DF00E41206 /* audiofile.mp3 */; };
 		E0A4A6401EE7E6DF00E41206 /* audioplayer_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A4A63D1EE7E6DF00E41206 /* audioplayer_pause.png */; };
@@ -52,6 +53,7 @@
 		5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordInfoViewController.swift; sourceTree = "<group>"; };
 		5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		5EC0A5971EF0AF900055900E /* MapPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPopupViewController.swift; sourceTree = "<group>"; };
 		E0A4A63A1EE7DC1D00E41206 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E0A4A63C1EE7E6DF00E41206 /* audiofile.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audiofile.mp3; sourceTree = "<group>"; };
 		E0A4A63D1EE7E6DF00E41206 /* audioplayer_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audioplayer_pause.png; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */,
 				5E7BF63F1EEC17320049C2C6 /* TabBarController.swift */,
 				5E7BF63D1EEC08F20049C2C6 /* MapViewController.swift */,
+				5EC0A5971EF0AF900055900E /* MapPopupViewController.swift */,
 				E0E954C51EE7D82B009913B5 /* Assets.xcassets */,
 				E0E954C71EE7D82B009913B5 /* LaunchScreen.storyboard */,
 				E0E954CA1EE7D82B009913B5 /* Info.plist */,
@@ -308,6 +311,7 @@
 				5E7BF63E1EEC08F20049C2C6 /* MapViewController.swift in Sources */,
 				E0E954BE1EE7D82B009913B5 /* ViewController.swift in Sources */,
 				5E10C46B1EE8208800E76AFB /* SignupViewController.swift in Sources */,
+				5EC0A5981EF0AF900055900E /* MapPopupViewController.swift in Sources */,
 				5E7BF6401EEC17320049C2C6 /* TabBarController.swift in Sources */,
 				E0E954C41EE7D82B009913B5 /* SoundMap.xcdatamodeld in Sources */,
 				E0A4A63B1EE7DC1D00E41206 /* TableViewController.swift in Sources */,
