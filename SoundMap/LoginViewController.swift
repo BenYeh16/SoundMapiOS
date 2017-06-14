@@ -52,6 +52,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let data = SharedData();
     var loginFlag = false {
         didSet(oldValue) {
+            data.setUserId(id: userIDTextField.text!)
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "login", sender: nil);
             }

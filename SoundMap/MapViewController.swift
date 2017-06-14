@@ -19,6 +19,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
     
+    let data = SharedData()
+    var pins = [[String : AnyObject]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // 4. 加入測試數據
         setupData()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // 5. 跟 Server 拿 Pin 的資料
+        getNearByPin()
     }
     
     
@@ -62,6 +67,66 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getNearByPin() {
+        //currentLocation = locationManager.location!
+        
+        //let url = data.getNearByPin(latitude: "\(currentLocation.coordinate.latitude)", longitude: "\(currentLocation.coordinate.longitude)");
+        
+        // Mock Position for Testing
+        
+        let url = data.getNearByPin(latitude: "12", longitude: "13")
+        
+        if ( url.isEmpty ) {
+            print("url is empty");
+        } else {
+            let session = URLSession(configuration: .default);
+            let loginSession = session.dataTask(with: URL(string: url)!) { (data, response, error) in
+                if let e = error {
+                    print("Error retrieving nearby pin: \(e)")
+                } else {
+                    if (response as? HTTPURLResponse) != nil {
+                        if data != nil {
+                            do  {
+                                self.pins.removeAll()
+                                
+                                let jsonData = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
+                                let parsedDatas = jsonData["result"] as! [[String: Any]]
+                                
+                                for i in 0 ..< parsedDatas.count {
+                                    
+                                    let sound_id = parsedDatas[i]["sound_id"] as! String
+                                    
+                                    // TODO : Save Datas into Dictionary
+                                    /*
+                                    self.pins.append(soundID:)
+                                    
+                                    self.pins[sound_id]["description"] = parsedDatas[i]["description"] as! String
+                                    self.pins[sound_id]["sound_id"] = parsedDatas[i]["sound_id"] as! String
+                                    self.pins[sound_id]["title"] = parsedDatas[i]["title"] as! String
+                                    self.pins[sound_id]["user_id"] = parsedDatas[i]["longitude"] as! Float
+                                    self.pins[sound_id]["date"] = parsedDatas[i]["date"] as! String
+                                    self.pins[sound_id]["tag"] = parsedDatas[i]["tag"] as! String
+                                    self.pins[sound_id]["latitude"] = parsedDatas[i]["latitude"] as! Float
+                                    */
+                                
+                                }
+                                
+                                //print (String(data: data!, encoding: String.Encoding.utf8) as String!)
+                            } catch let error as Error{
+                                print (error)
+                            }
+                        } else {
+                            print("Couldn't get data: Data is nil")
+                        }
+                    } else {
+                        print("Couldn't get response code for some reason")
+                    }
+                }
+            }
+            loginSession.resume();
+        }
     }
     
     func setupData() {
@@ -91,8 +156,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             restaurantAnnotation.coordinate = coordinate;
             restaurantAnnotation.title = "\(title)";
             mapView.addAnnotation(restaurantAnnotation)
-            
-            
             
         }
         else {

@@ -28,11 +28,49 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let picker = UIImagePickerController()
     
-    let url = URL(string: "http://140.112.90.200:2096/")!
-    //let url = URL(string: "https://s3.amazonaws.com/kargopolov/BlueCafe.mp3")!
-    //let NSurl = NSURL(string: "http://140.112.90.200:2096/")!
     let catPictureURL = URL(string: "http://140.112.90.200:2096/")!
-    let testURL = URL(string: "http://140.112.90.203:4005/getuserinformation/1")!
+    
+    let data = SharedData()
+    
+    func loadProfilePic(){
+        let url = data.getUserPhoto(id: data.getUserId());
+        if ( url.isEmpty ) {
+            print("url is empty");
+        } else {
+            let session = URLSession(configuration: .default);
+            let getUserPhotoSession = session.dataTask(with: URL(string: url)!) { (data, response, error) in
+                if let e = error {
+                    print("Error getting user photo: \(e)")
+                } else {
+                    if let res = response as? HTTPURLResponse {
+                        print("Check if get user photo success \(res.statusCode)")
+                        let image = UIImage(data: data!)
+                        self.profileImage.image = image
+                    } else {
+                        print("Couldn't get response code for some reason")
+                    }
+                }
+            }
+            getUserPhotoSession.resume();
+        }
+    }
+    
+    func loadProfileAudio(){
+        let url = data.getUserAudio(id: data.getUserId());
+        let playerItem = AVPlayerItem(url: URL(string: url)!)
+        
+        do {
+            try remotePlayer = AVPlayer(playerItem: playerItem)
+            self.remotePlayer.volume = 1.0
+            print ("url:\(url)")
+        } catch {
+            print ("Can't load user audio")
+        }
+    }
+    
+    //func uploadProfilePhoto(UIImage: image){
+        //let url = data.get
+    //}
     
     
     override func viewDidLoad() {
@@ -52,61 +90,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.profileImage.layer.borderWidth = 2
         self.profileImage.layer.borderColor = UIColor(red: 86/255, green: 86/255, blue: 1/255, alpha: 1).cgColor
         
- 
-        // Get audio
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-
-                if let data = data,
-                    let html = String(data: data, encoding: String.Encoding.utf8){
-                    print(html)
-                }
-            }
-        task.resume()
- 
-        // Creating a session object with the default configuration.
-        // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
-        let session = URLSession(configuration: .default)
-        
-        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-        let downloadPicTask = session.dataTask(with: self.testURL) { (data, response, error) in
-            // The download has finished.
-            if let e = error {
-                print("Error downloading cat picture: \(e)")
-            } else {
-                // No errors found.
-                // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    print("Downloaded cat picture with response code \(res.statusCode)")
-                    if data != nil {
-                        // Finally convert that Data into an image and do what you wish with it.
-                        //let image = UIImage(data: imageData)
-                        //self.profileImage.image = image
-                        do  {
-                            let parsedData = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, Any>
-                            let currentConditions = parsedData["name"] as! String
-                            
-                            let image = UIImage(data: parsedData["photo"] as! Data)
-                            self.profileImage.image = image
-                            
-                            
-                            
-                            print(currentConditions)
-
-                        } catch let error as Error{
-                            print (error)
-                        }
-                        //print(imageData)
-                        // Do something with your image.
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                } else {
-                    print("Couldn't get response code for some reason")
-                }
-            }
-        }
-        downloadPicTask.resume()
- 
         
         self.isPaused = false;
         do {
@@ -114,8 +97,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
             audioSlider.maximumValue = Float(player.duration)
             audioSlider.value = 0.0
-            audioTime.text = stringFromTimeInterval(interval: player.duration)
-            audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
+            //audioTime.text = stringFromTimeInterval(interval: player.duration)
+            //audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
             //try player = AVAudioPlayer(contentsOf: url)
             //let playerItem = AVPlayerItem(url: self.url)
             
@@ -124,7 +107,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         } catch {
         }
         
+        // 1. Load Profile Picture
+        
+        loadProfilePic();
+        
+        // 2. Load User Name
+        
+        userName.text = data.getUserId()
+        
+        // 3. Load Profile Audio
+        
+        loadProfileAudio();
+        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -136,14 +132,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     /****** Audio ******/
     @IBAction func playAudioPressed(_ sender: Any) {
         if ( self.isPaused == false ) {
-            player.play()
+            remotePlayer.play()
             playButton.setImage(UIImage(named: "music-pause"), for: .normal)
             self.isPaused = true
-            //audioSlider.value = Float(player.currentTime)
+            //audioSlider.value = stringFromCMTime(CMTimeGetSeconds(remotePlayer.currentTime()))
+            //audioSlider.
             timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
             RunLoop.main.add(timer, forMode: .commonModes)
         } else {
-            player.pause()
+            remotePlayer.pause()
             playButton.setImage(UIImage(named: "music-play"), for: .normal)
             self.isPaused = false
             timer.invalidate()
@@ -151,7 +148,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     @IBAction func slide(_ sender: Any) {
-         player.currentTime = TimeInterval(audioSlider.value)
+         //remotePlayer.currentItem?. = TimeInterval(audioSlider.value)
     }
     
     func stringFromTimeInterval(interval: TimeInterval) -> String {
@@ -161,10 +158,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
+    /*func stringFromCMTime(time: Float) -> String {
+        let totalTime = Int(time)
+        let minutes = floor( totalTime % 3600 / 60 );
+        let seconds = floor( totalTime % 3600 % 60 );
+        return String(format: "%02d:%02d", minutes, seconds)
+    }*/
+    
     func updateSlider(_ timer: Timer) {
-        audioSlider.value = Float(player.currentTime)
-        audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
-        audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
+        //audioSlider.value = Float(player.currentTime)
+        audioCurrent.text = String(describing: CMTimeCopyDescription(nil, remotePlayer.currentTime())!)
+        //audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
     }
     
     
@@ -200,6 +204,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         profileImage.contentMode = .scaleAspectFill //3
         profileImage.image = chosenImage //4
+        
+        // Upload Image
+        //uploadProfileImage(chosenImage: UIImage);
         
         dismiss(animated:true, completion: nil) //5
     }
