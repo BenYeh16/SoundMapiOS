@@ -71,4 +71,10 @@ final class SharedData {
         return url
     }
     
+    func storeSound(latitude: String, longitude: String, id: String, title: String, descript: String) -> String {
+        var url = hostname + "storeSound";
+        url += "/\(id)"
+        return url
+    }
+    
 }

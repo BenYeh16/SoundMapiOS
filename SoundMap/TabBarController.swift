@@ -17,6 +17,7 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
     var isRecording = true
     var soundFileURL: URL!
     var playButton: UIButton! = nil
+    
     @IBOutlet var recordButton: UIButton!
     
     //var timer = Timer
@@ -24,7 +25,7 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRecordButton()
-        //setupPlayButton()
+
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -44,8 +45,14 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
         playButton.backgroundColor = UIColor.gray
         playButton.addTarget(self, action: #selector(pressPlayButton(button:)), for: .touchUpInside)
         self.view.addSubview(playButton)
+<<<<<<< Updated upstream
     }*/
     /*func pressPlayButton(button: UIButton) {
+=======
+    }
+    
+    func pressPlayButton(button: UIButton) {
+>>>>>>> Stashed changes
         var url:URL?
         if self.recorder != nil {
             url = self.recorder.url
@@ -76,27 +83,9 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
         self.view.addSubview(recordButton)
         self.view.layoutIfNeeded()
         
-        //recordButton.addTarget(self, action: #selector(TabBarController.startRecording), for: UIControlEvents.touchDown)
-        //recordButton.addTarget(self, action: #selector(TabBarController.stopRecording), for: [UIControlEvents.touchUpInside, UIControlEvents.touchUpOutside])
-        
     }
     
-    /*func startRecording() {
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(TabBarController.spin), userInfo: nil, repeats: true)
-        
-    }
     
-    func spin() {
-        // Spin
-        UIView.animate(withDuration: 5, animations:{
-    self.recordButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-    })
-
-    }
-    
-    func stopRecording() {
-        timer.invalidate(<#Timer#>)
-    }*/
     
     
     @IBAction func record(_ sender: UIButton) {

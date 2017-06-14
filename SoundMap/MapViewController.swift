@@ -15,7 +15,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
-    
+
+    var refreshButton: UIButton! = nil
+    var annotationArray: Array<MKPointAnnotation> = []
+    @IBAction func PinBtn(_ sender: Any) {
+        currentLocation = locationManager.location!
+        //showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
+        
+        
+        longitudeLabel.text = "\(currentLocation.coordinate.longitude)"
+        latitudeLabel.text = "\(currentLocation.coordinate.latitude)"
+        
+        //let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
+        //mapView.add(circle)
+        
+        /*
+        let nowAnnotation = MKPointAnnotation()
+        nowAnnotation.coordinate = currentLocation.coordinate;
+        nowAnnotation.title = "Now";
+        mapView.addAnnotation(nowAnnotation)*/
+        
+    }
     
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
@@ -25,7 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupRefreshButton()
         // 2. 配置 locationManager
         locationManager.delegate = self as? CLLocationManagerDelegate;
         locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
@@ -37,7 +57,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.userTrackingMode = .follow
         
         // 4. 加入測試數據
-        setupData()
+        // setupData()
         // Do any additional setup after loading the view, typically from a nib.
 
         
@@ -47,6 +67,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     }
     
+    func setupRefreshButton(){
+        refreshButton = UIButton(frame: CGRect(x: 250, y: 250, width: 50, height: 50))
+        refreshButton.backgroundColor = UIColor.red
+        refreshButton.addTarget(self, action: #selector(pressRefreshButton(button:)), for: .touchUpInside)
+        self.view.addSubview(refreshButton)
+    }
+    
+    func pressRefreshButton(button: UIButton){
+        //delete old pins
+        for anno in annotationArray {
+            mapView.removeAnnotation(anno)
+        }
+        //get locations from server
+        
+        //draw all pins
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -57,14 +94,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
             // 2. 用戶不同意
         else if CLLocationManager.authorizationStatus() == .denied {
-            showAlert(title: "Hello  Coders", message: "Location services were previously denied. Please enable location services for this app in Settings.", btnstr: "Close Alert")
+            //showAlert(title: "Hello  Coders", message: "Location services were previously denied. Please enable location services for this app in Settings.", btnstr: "Close Alert")
             
         }
             // 3. 用戶已經同意
         else if CLLocationManager.authorizationStatus() == .authorizedAlways {
             locationManager.startUpdatingLocation()
         }
-        //currentLocation = locationManager.location!
+        
     }
     
     
@@ -160,7 +197,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             restaurantAnnotation.coordinate = coordinate;
             restaurantAnnotation.title = "\(title)";
             mapView.addAnnotation(restaurantAnnotation)
-            
+
         }
         else {
             print("System can't track regions")
@@ -205,46 +242,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return annotationView
     }
     
-    
-    
-    
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        showAlert(title: "Entering", message: "enter \(region.identifier)", btnstr: "I got it!")
-        //showAlert("enter \(region.identifier)")
-        //monitoredRegions[region.identifier] = NSDate()
-    }
-    
-    
-    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
-        showAlert(title: "Leaving", message: "leaving \(region.identifier)", btnstr: "I got it!")
-        //showAlert("exit \(region.identifier)")
-        //monitoredRegions.removeValueForKey(region.identifier)
-    }
-    
-    
-    func showAlert (title: String, message: String,
-                    btnstr: String){
-        let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "\(btnstr)", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
 
-    @IBAction func PinBtn(_ sender: Any) {
-        currentLocation = locationManager.location!
-        showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
+
+    func addPin(location: CLLocation) {
+
+        
+        //currentLocation = locationManager.location!
+        //showAlert(title: "add pin", message: "Pining a pin on location", btnstr: "Close Alert")
         
         
-        longitudeLabel.text = "\(currentLocation.coordinate.longitude)"
-        latitudeLabel.text = "\(currentLocation.coordinate.latitude)"
+        longitudeLabel.text = "\(location.coordinate.longitude)"
+        latitudeLabel.text = "\(location.coordinate.latitude)"
         
-        let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
-        mapView.add(circle)
+        //let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
+        //mapView.add(circle)
         
         let nowAnnotation = MKPointAnnotation()
-        nowAnnotation.coordinate = currentLocation.coordinate;
+        
+        nowAnnotation.coordinate = location.coordinate;
         nowAnnotation.title = "Now";
+        annotationArray.append(nowAnnotation)
         mapView.addAnnotation(nowAnnotation)
         
     }
@@ -264,7 +281,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             // TODO: Get data from server
             //
-            //
+            
             
             // TODO: Pass data
             destinationVC.tmpOwner = "ChelseaHu"

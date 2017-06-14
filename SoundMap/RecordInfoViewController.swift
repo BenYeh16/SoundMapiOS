@@ -31,14 +31,10 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     var timer: Timer!
     var soundFileURL: URL?
     
-
-
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set design attributes
         recordInfoView.layer.cornerRadius = 10
         recordInfoView.layer.masksToBounds = true
@@ -157,6 +153,7 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     /****** Button action ******/
     @IBAction func saveSound(_ sender: Any) {
+        let data = SharedData()
         //let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         //let soundFileURL: URL = documentsDirectory.appendingPathComponent("recording-123.m4a")
         //self.parentView.pinFromOutside()
@@ -179,10 +176,55 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
              user id
              titleText.text 
              descriptionText.text
-             \(currentLocation.coordinate.longitude)
+             \(currentLocation.coordinate.latitude)
              \(currentLocation.coordinate.longitude)
              \(soundFileURL)
                 */
+            
+            var storeUrl = data.storeSound(latitude: "25.033331",
+                longitude: "121.534831",
+                id: data.getUserId(),
+                title: titleText.text!,
+                descript: descriptionText.text
+            )
+            print("!@#!@#!# storeUrl" + storeUrl)
+            var request = URLRequest(url: URL(string: storeUrl)!) // link removed
+            //var request = URLRequest(url : URL(string: "http://140.112.90.203:4000/setUserVoice/1")!)
+            
+            request.httpMethod = "POST"
+            
+            
+            /* create body*/
+            let body = NSMutableData()
+            //let file = "\(soundFileURL)" // :String
+            let bundlefile = Bundle.main.path(forResource: "audiofile", ofType: "mp3")
+            print("!!!!!! " + bundlefile!)
+            let url = URL(string: bundlefile!) // :URL
+            let data = try! Data(contentsOf: url!)
+            body.append(data)
+            
+            request.httpBody = body as Data
+            /* body create complete*/
+            
+            let atask = URLSession.shared.dataTask(with: request) { data, response, error in
+                if error != nil{
+                    print("error in dataTask")
+                    return
+                }
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    
+                    if let parseJSON = json {
+                        let resultValue:String = parseJSON["success"] as! String;
+                        print("result: \(resultValue)")
+                        print(parseJSON)
+                    }
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+            atask.resume()
             // Close modal
             dismiss(animated: true, completion: nil)
         }else {
