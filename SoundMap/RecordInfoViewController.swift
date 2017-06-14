@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
@@ -17,6 +19,9 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +125,61 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     /****** Button action ******/
     @IBAction func saveSound(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let soundFileURL: URL = documentsDirectory.appendingPathComponent("recording-123.m4a")
+        //self.parentView.pinFromOutside()
+        
+        
+        
+        print("soundfile url: '\(soundFileURL)'")
+        print("title: " + titleText.text!)
+        print ("descripText: " + descriptionText.text)
+        
+        if ( titleText.text != "" && descriptionText.text != ""){
+            
+            print("ready to upload")
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopSoundNotification"), object: nil)
+            
+            let locationManager = CLLocationManager()
+            var currentLocation = locationManager.location!
+            /*upload with
+             user id
+             titleText.text 
+             descriptionText.text
+             \(currentLocation.coordinate.longitude)
+             \(currentLocation.coordinate.longitude)
+             \(soundFileURL)
+                */
+            // Close modal
+            dismiss(animated: true, completion: nil)
+        }else {
+            let alertController = UIAlertController(
+                title: "Don't leave Blank",
+                message: "Title or description missing",
+                preferredStyle: .alert)
+            
+            // 建立[確認]按鈕
+            let okAction = UIAlertAction(
+                title: "確認",
+                style: .default,
+                handler: {
+                    (action: UIAlertAction!) -> Void in
+                    print("按下確認後，閉包裡的動作")
+            })
+            alertController.addAction(okAction)
+            
+            // 顯示提示框
+            self.present(
+                alertController,
+                animated: true,
+                completion: nil)
+        }
+        
+        
+        
+        
+        //
     }
     
     @IBAction func closePopup(_ sender: Any) {
@@ -137,5 +196,6 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }
