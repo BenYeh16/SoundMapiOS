@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0i1-3K-Rjj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0i1-3K-Rjj">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,7 +61,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sje-L6-fJ4"/>
-                                    <segue destination="3eF-xZ-6PO" kind="showDetail" id="1pE-NC-tpV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyw-jI-LFW">
@@ -70,7 +69,7 @@
                                 <state key="normal" title="Signup"/>
                                 <connections>
                                     <action selector="signupButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G0Y-qA-QQ2"/>
-                                    <segue destination="IbU-Ed-gB4" kind="showDetail" action="showViewController:sender:" id="1eS-Wx-abn"/>
+                                    <segue destination="IbU-Ed-gB4" kind="showDetail" identifier="signUp" action="showViewController:sender:" id="1eS-Wx-abn"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-ir-pMH">
@@ -93,6 +92,7 @@
                         <outlet property="activityIndicator" destination="gC9-ir-pMH" id="afu-JR-IVm"/>
                         <outlet property="passwordTextField" destination="qGh-IG-lxy" id="W4f-ox-y3u"/>
                         <outlet property="userIDTextField" destination="k1v-nz-7x8" id="zyg-2K-rmW"/>
+                        <segue destination="3eF-xZ-6PO" kind="show" identifier="login" id="eAU-XH-rDE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -293,7 +293,7 @@
         <!--Map-->
         <scene sceneID="epe-1N-4cH">
             <objects>
-                <viewController title="Map" id="LE7-ga-mwM" customClass="MapViewController" customModule="SoundMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="map" title="Map" id="LE7-ga-mwM" customClass="MapViewController" customModule="SoundMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q1K-1L-mi9"/>
                         <viewControllerLayoutGuide type="bottom" id="TXP-N1-4Dj"/>
