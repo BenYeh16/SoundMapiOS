@@ -24,7 +24,7 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRecordButton()
-        setupPlayButton()
+        //setupPlayButton()
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -39,13 +39,13 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func setupPlayButton(){
+    /*func setupPlayButton(){
         playButton = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 100))
         playButton.backgroundColor = UIColor.gray
         playButton.addTarget(self, action: #selector(pressPlayButton(button:)), for: .touchUpInside)
         self.view.addSubview(playButton)
-    }
-    func pressPlayButton(button: UIButton) {
+    }*/
+    /*func pressPlayButton(button: UIButton) {
         var url:URL?
         if self.recorder != nil {
             url = self.recorder.url
@@ -65,7 +65,7 @@ class TabBarController: UITabBarController, UIPopoverPresentationControllerDeleg
             print(error.localizedDescription)
         }
         NSLog("pressed!")
-    }
+    }*/
     // TabBarButton – Setup Middle Button
     func setupRecordButton() {
         var recordButtonFrame = recordButton.frame
