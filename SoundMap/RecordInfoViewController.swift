@@ -298,6 +298,13 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
         
     }
+    func stringFromFloatCMTime(time: Double) -> String {
+        let intTime = Int(time)
+        let seconds = intTime % 60
+        let minutes = ( intTime / 60 ) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
 
     
     /*

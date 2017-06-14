@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../../../../../Downloads/try.gpx">
+   </FileRef>
+   <FileRef
       location = "group:SoundMap.xcodeproj">
    </FileRef>
    <FileRef
