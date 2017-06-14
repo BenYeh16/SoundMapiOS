@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import CoreLocation
 
 
@@ -20,6 +21,18 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var audioCurrent: UILabel!
+    @IBOutlet weak var audioTime: UILabel!
+    @IBOutlet weak var audioSlider: UISlider!
+    @IBOutlet weak var playButton: UIButton!
+    var player:AVAudioPlayer = AVAudioPlayer();
+    var remotePlayer:AVPlayer = AVPlayer();
+    var isPaused:BooleanLiteralType = false;
+    var timer: Timer!
+    var soundFileURL: URL?
+    
+
+
     
     
     
@@ -41,6 +54,28 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
         // Text delegate
         descriptionText.delegate = self
         titleText.delegate = self
+        
+        // Initialize audio
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        soundFileURL = documentsDirectory.appendingPathComponent("recording-123.m4a")
+
+        self.isPaused = false;
+        do {
+            //let audioPath = Bundle.main.path(forResource: "audiofile", ofType: "mp3")
+            //try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
+            try player = AVAudioPlayer(contentsOf: soundFileURL!)
+            player.volume = 1.0
+            audioSlider.maximumValue = Float(player.duration)
+            audioSlider.value = 0.0
+            audioTime.text = stringFromTimeInterval(interval: player.duration)
+            audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
+            //try player = AVAudioPlayer(contentsOf: url)
+            //let playerItem = AVPlayerItem(url: self.url)
+            
+            //try self.remotePlayer = AVPlayer(playerItem: playerItem)
+            //self.remotePlayer.volume = 1.0
+        } catch {
+        }
 
     }
 
@@ -86,13 +121,10 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     }*/
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        //let scrollPoint : CGPoint = CGPoint(x: 0, y: self.descriptionText.frame.origin.y)
-        //self.scrollView.setContentOffset(scrollPoint, animated: true)
         animateViewMoving(up: true, moveValue: 50)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        //self.scrollView.setContentOffset(CGPoint.zero, animated: true)
         animateViewMoving(up: true, moveValue: -50)
     }
     
@@ -125,8 +157,8 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     /****** Button action ******/
     @IBAction func saveSound(_ sender: Any) {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let soundFileURL: URL = documentsDirectory.appendingPathComponent("recording-123.m4a")
+        //let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        //let soundFileURL: URL = documentsDirectory.appendingPathComponent("recording-123.m4a")
         //self.parentView.pinFromOutside()
         
         
@@ -184,6 +216,45 @@ class RecordInfoViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     @IBAction func closePopup(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+
+    
+    /****** Audio ******/
+    @IBAction func playAudioPressed(_ sender: Any) {
+        if ( self.isPaused == false ) {
+            player.play()
+            playButton.setImage(UIImage(named: "music-pause"), for: .normal)
+            self.isPaused = true
+            //audioSlider.value = Float(player.currentTime)
+            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)
+        } else {
+            player.pause()
+            playButton.setImage(UIImage(named: "music-play"), for: .normal)
+            self.isPaused = false
+            timer.invalidate()
+        }
+    }
+    
+    @IBAction func slide(_ sender: Any) {
+        player.currentTime = TimeInterval(audioSlider.value)
+    }
+    
+    func stringFromTimeInterval(interval: TimeInterval) -> String {
+        let interval = Int(interval)
+        let seconds = interval % 60
+        let minutes = (interval / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    func updateSlider(_ timer: Timer) {
+        audioSlider.value = Float(player.currentTime)
+        audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
+        audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
+        if audioTime.text == "00:00" { // done
+            playButton.setImage(UIImage(named: "music-play"), for: .normal)
+        }
+        
     }
 
     

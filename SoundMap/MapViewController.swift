@@ -16,23 +16,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
     
-    @IBAction func PinBtn(_ sender: Any) {
-        currentLocation = locationManager.location!
-        showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
-        
-        
-        longitudeLabel.text = "\(currentLocation.coordinate.longitude)"
-        latitudeLabel.text = "\(currentLocation.coordinate.latitude)"
-        
-        let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
-        mapView.add(circle)
-        
-        let nowAnnotation = MKPointAnnotation()
-        nowAnnotation.coordinate = currentLocation.coordinate;
-        nowAnnotation.title = "Now";
-        mapView.addAnnotation(nowAnnotation)
-        
-    }
     
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
@@ -183,7 +166,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
 
-    func addPin() {
+    @IBAction func PinBtn(_ sender: Any) {
         currentLocation = locationManager.location!
         showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
         
@@ -200,7 +183,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotation(nowAnnotation)
         
     }
-
+    
     
     /****** Popover related ******/
     
