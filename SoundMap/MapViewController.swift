@@ -15,7 +15,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
-
+    
+    
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
     
@@ -38,9 +39,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // 4. 加入測試數據
         setupData()
         // Do any additional setup after loading the view, typically from a nib.
+
         
         // 5. 跟 Server 拿 Pin 的資料
         getNearByPin()
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.PinBtn(_:)),name:NSNotification.Name(rawValue: "stopSoundNotification"), object: nil)
+
     }
     
     
@@ -227,7 +231,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
 
-    func addPin() {
+    @IBAction func PinBtn(_ sender: Any) {
         currentLocation = locationManager.location!
         showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
         
@@ -244,7 +248,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotation(nowAnnotation)
         
     }
-
+    
     
     /****** Popover related ******/
     
