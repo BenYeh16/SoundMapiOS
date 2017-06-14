@@ -14,6 +14,15 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    let data = SharedData();
+    var setUpFlag = false {
+        didSet(oldValue) {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "backToLogin", sender: nil);
+            }
+        }
+    };
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +36,34 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpAction(_ sender: Any) {
-        activityIndicator.startAnimating()
+        if ( userIDTextField.hasText && passwordTextField.hasText ) {
+            activityIndicator.startAnimating()
+            let url = data.getSetUserAccount(id: userIDTextField.text!, password: passwordTextField.text!);
+            if ( url.isEmpty ) {
+                print("url is empty");
+            } else {
+                let session = URLSession(configuration: .default);
+                let loginSession = session.dataTask(with: URL(string: url)!) { (data, response, error) in
+                    if let e = error {
+                        print("Error checking SetUp success: \(e)")
+                    } else {
+                        if let res = response as? HTTPURLResponse {
+                            print("Check if SetUp success \(res.statusCode)")
+                            let result = String(data: data!, encoding: String.Encoding.utf8) as String!;
+                            if ( result == "True" ) {
+                                self.setUpFlag = true;
+                            } else {
+                                // TODO : SetUp Fail
+                            }
+                        } else {
+                            print("Couldn't get response code for some reason")
+                        }
+                    }
+                }
+                loginSession.resume();
+            }
+        }
+
     }
     
     
