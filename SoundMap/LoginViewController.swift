@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var userIDTextField: UITextField!
@@ -16,20 +17,56 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBAction func login(_ sender: UIButton) {
-        activityIndicator.startAnimating()
+        if ( userIDTextField.hasText && passwordTextField.hasText ) {
+            activityIndicator.startAnimating()
+            let url = data.getIsLoginSuccess(id: userIDTextField.text!, password: passwordTextField.text!);
+            if ( url.isEmpty ) {
+                print("url is empty");
+            } else {
+                let session = URLSession(configuration: .default);
+                let loginSession = session.dataTask(with: URL(string: url)!) { (data, response, error) in
+                    if let e = error {
+                        print("Error checking login success: \(e)")
+                    } else {
+                        if let res = response as? HTTPURLResponse {
+                            print("Check if login success \(res.statusCode)")
+                            let result = String(data: data!, encoding: String.Encoding.utf8) as String!;
+                            if ( result == "True" ) {
+                                self.loginFlag = true;
+                            } else {
+                                // TODO : Login Fail
+                            }
+                        } else {
+                            print("Couldn't get response code for some reason")
+                        }
+                    }
+                }
+                loginSession.resume();
+            }
+        }
     }
     
     @IBAction func signupButton(_ sender: Any) {
     }
     
+    let data = SharedData();
+    var loginFlag = false {
+        didSet(oldValue) {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "login", sender: nil);
+            }
+        }
+    };
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // TextField
         userIDTextField.delegate = self
         passwordTextField.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
