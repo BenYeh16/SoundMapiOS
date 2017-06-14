@@ -11,26 +11,29 @@ import AVFoundation
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+
+    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var uploadButton: UIButton!
+    
+    @IBOutlet weak var audioCurrent: UILabel!
+    @IBOutlet weak var audioTime: UILabel!
+    @IBOutlet weak var audioSlider: UISlider!
+    @IBOutlet weak var playButton: UIButton!
+    
     var player:AVAudioPlayer = AVAudioPlayer();
     var remotePlayer:AVPlayer = AVPlayer();
     var isPaused:BooleanLiteralType = false;
     var timer: Timer!
+    
+    let picker = UIImagePickerController()
     
     let url = URL(string: "http://140.112.90.200:2096/")!
     //let url = URL(string: "https://s3.amazonaws.com/kargopolov/BlueCafe.mp3")!
     //let NSurl = NSURL(string: "http://140.112.90.200:2096/")!
     let catPictureURL = URL(string: "http://140.112.90.200:2096/")!
     let testURL = URL(string: "http://140.112.90.203:4005/getuserinformation/1")!
-    @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var profileImage: UIImageView!
-
-    let picker = UIImagePickerController()
     
-    @IBOutlet weak var audioCurrent: UILabel!
-    @IBOutlet weak var audioTime: UILabel!
-    @IBOutlet weak var audioSlider: UISlider!
-    @IBOutlet weak var uploadButton: UIButton!
-    @IBOutlet weak var playButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +77,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 // It would be weird if we didn't have a response, so check for that too.
                 if let res = response as? HTTPURLResponse {
                     print("Downloaded cat picture with response code \(res.statusCode)")
-                    if let imageData = data {
+                    if data != nil {
                         // Finally convert that Data into an image and do what you wish with it.
                         //let image = UIImage(data: imageData)
                         //self.profileImage.image = image
@@ -128,6 +131,29 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
+
+    
+    /****** Audio ******/
+    @IBAction func playAudioPressed(_ sender: Any) {
+        if ( self.isPaused == false ) {
+            player.play()
+            playButton.setImage(UIImage(named: "music-pause"), for: .normal)
+            self.isPaused = true
+            //audioSlider.value = Float(player.currentTime)
+            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)
+        } else {
+            player.pause()
+            playButton.setImage(UIImage(named: "music-play"), for: .normal)
+            self.isPaused = false
+            timer.invalidate()
+        }
+    }
+
+    @IBAction func slide(_ sender: Any) {
+         player.currentTime = TimeInterval(audioSlider.value)
+    }
+    
     func stringFromTimeInterval(interval: TimeInterval) -> String {
         let interval = Int(interval)
         let seconds = interval % 60
@@ -141,28 +167,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
     }
     
-    /****** Audio ******/
-    @IBAction func playAudioPressed(_ sender: Any) {
-        if ( self.isPaused == false ) {
-            player.play()
-            playButton.setBackgroundImage(UIImage(named: "audioplayer_pause.png"), for: .normal)
-            self.isPaused = true
-            //audioSlider.value = Float(player.currentTime)
-            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-            RunLoop.main.add(timer, forMode: .commonModes)
-        } else {
-            player.pause()
-            playButton.setBackgroundImage(UIImage.init(named: "audioplayer_play"), for: .normal)
-            self.isPaused = false
-            timer.invalidate()
-        }
-    }
-
-    @IBAction func slide(_ sender: Any) {
-         player.currentTime = TimeInterval(audioSlider.value)
-    }
     
     /****** Photo ******/
+    // Upload photo from library
     @IBAction func uploadPhoto(_ sender: Any) {
         self.picker.allowsEditing = false
         self.picker.sourceType = .photoLibrary
@@ -173,7 +180,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-    @IBAction func shootPhoto(_ sender: Any) {
+    // Upload photo from taken picture
+    /*@IBAction func shootPhoto(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.camera
@@ -183,24 +191,25 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else {
             noCamera()
         }
-    }
+    }*/
     
-    //MARK: - Delegates
+    // Pick image
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+                               didFinishPickingMediaWithInfo info: [String : Any])
     {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         profileImage.contentMode = .scaleAspectFill //3
         profileImage.image = chosenImage //4
         
-
         dismiss(animated:true, completion: nil) //5
     }
     
+    // Cancel picking from library
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
     
+    // Alert if no camera
     func noCamera(){
         let alertVC = UIAlertController(
             title: "No Camera",
@@ -216,15 +225,5 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             animated: true,
             completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
