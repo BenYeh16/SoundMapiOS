@@ -42,6 +42,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     let data = SharedData()
     var pins = [[String : AnyObject]]()
+    var descriptDict = [String : String]()
+    var titleDict = [String : String]()
+    var ownerDict = [String : String]()
+    var latitudeDict = [String : CLLocationDegrees]()
+    var longitudeDict = [String : CLLocationDegrees]()
+    var soundIDDict = [CLLocationDegrees: String]()
+    
+    var target: String = "1"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,12 +120,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func getNearByPin() {
         //currentLocation = locationManager.location!
-        
+        //print("\(currentLocation.coordinate.latitude)")
+        //print("\(currentLocation.coordinate.longitude)")
         //let url = data.getNearByPin(latitude: "\(currentLocation.coordinate.latitude)", longitude: "\(currentLocation.coordinate.longitude)");
-        
         // Mock Position for Testing
         
-        let url = data.getNearByPin(latitude: "12", longitude: "13")
+        let url = data.getNearByPin(latitude: "25.02", longitude: "121.54123")
         
         if ( url.isEmpty ) {
             print("url is empty");
@@ -133,11 +141,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                                 self.pins.removeAll()
                                 
                                 let jsonData = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
+                                print(jsonData)
                                 let parsedDatas = jsonData["result"] as! [[String: Any]]
                                 
                                 for i in 0 ..< parsedDatas.count {
                                     
-                                    let sound_id = parsedDatas[i]["sound_id"] as! String
+                                    let sound_id: String = parsedDatas[i]["sound_id"] as! String
                                     
                                     // TODO : Save Datas into Dictionary
                                     /*
@@ -150,7 +159,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                                     self.pins[sound_id]["date"] = parsedDatas[i]["date"] as! String
                                     self.pins[sound_id]["tag"] = parsedDatas[i]["tag"] as! String
                                     self.pins[sound_id]["latitude"] = parsedDatas[i]["latitude"] as! Float
-                                    */
+                                        */
+                                    //descriptDict.append(soundID: )
+                                    self.descriptDict[sound_id] = parsedDatas[i]["description"] as? String
+                                    self.titleDict[sound_id] = parsedDatas[i]["title"] as? String
+                                    self.ownerDict[sound_id] = parsedDatas[i]["user_id"] as? String
+                                    self.latitudeDict[sound_id] = parsedDatas[i]["latitude"] as? CLLocationDegrees
+                                    self.longitudeDict[sound_id] = parsedDatas[i]["longitude"] as? CLLocationDegrees
+
+                                    self.addNewPin(latitude: self.latitudeDict[sound_id]!, longitude: self.longitudeDict[sound_id]!, ID: sound_id)
                                 
                                 }
                                 
@@ -193,10 +210,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.add(circle)
             
             // 4. 創建大頭釘(annotation)
-            let restaurantAnnotation = MKPointAnnotation()
+            /*let restaurantAnnotation = MKPointAnnotation()
             restaurantAnnotation.coordinate = coordinate;
             restaurantAnnotation.title = "\(title)";
-            mapView.addAnnotation(restaurantAnnotation)
+
+            mapView.addAnnotation(restaurantAnnotation)*/
+            var sound_id: String = "24"
+            self.descriptDict[sound_id] = "COme and listen"
+            self.titleDict[sound_id] = "Yo"
+            self.ownerDict[sound_id] = "BenYeh"
+            self.latitudeDict[sound_id] = 25.0243
+            self.longitudeDict[sound_id] = 121.542
+            self.addNewPin(latitude: self.latitudeDict[sound_id]!, longitude: self.longitudeDict[sound_id]!, ID: sound_id)
+            
+            // Fake
+            sound_id = "25"
+            self.descriptDict[sound_id] = "I like this best song."
+            self.titleDict[sound_id] = "Favorite"
+            self.ownerDict[sound_id] = "Allen. L"
+            self.latitudeDict[sound_id] = 25.025
+            self.longitudeDict[sound_id] = 121.55
+            self.addNewPin(latitude: self.latitudeDict[sound_id]!, longitude: self.longitudeDict[sound_id]!, ID: sound_id)
 
         }
         else {
@@ -258,12 +292,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //mapView.add(circle)
         
         let nowAnnotation = MKPointAnnotation()
-        
-        nowAnnotation.coordinate = location.coordinate;
-        nowAnnotation.title = "Now";
-        annotationArray.append(nowAnnotation)
+        nowAnnotation.coordinate = currentLocation.coordinate;
+        nowAnnotation.title = "10";
         mapView.addAnnotation(nowAnnotation)
         
+    }
+    
+    func addNewPin(latitude: CLLocationDegrees, longitude: CLLocationDegrees, ID: String) {
+        let nowAnnotation = MKPointAnnotation()
+        nowAnnotation.coordinate.latitude = latitude
+        nowAnnotation.coordinate.longitude = longitude
+        nowAnnotation.title = ID;
+        mapView.addAnnotation(nowAnnotation)
     }
     
     
@@ -279,22 +319,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if segue.identifier == "mapPopup" {
             let destinationVC = segue.destination as! MapPopupViewController
             
-            // TODO: Get data from server
-            //
             
-            
-            // TODO: Pass data
-            destinationVC.tmpOwner = "ChelseaHu"
-            destinationVC.tmpTitle = "MyVoice"
-            destinationVC.tmpDescript = "Listen to my lovely sound"
+            // Pass data
+            destinationVC.tmpOwner = ownerDict[target]
+            destinationVC.tmpTitle = titleDict[target]
+            destinationVC.tmpDescript = descriptDict[target]
             destinationVC.tmpImage = #imageLiteral(resourceName: "music-play")
-            destinationVC.soundURL = "xxx"
+            destinationVC.soundURL = "http://140.112.90.203:4000/getSoundBySoundId/\(target)"
             
         }
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         mapView.deselectAnnotation(view.annotation, animated: true)
+        target = view.annotation!.title as! String
         
         performSegue(withIdentifier: "mapPopup", sender: nil)
     }

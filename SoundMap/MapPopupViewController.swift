@@ -16,8 +16,7 @@ class MapPopupViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var mapPopupView: UIView!
     @IBOutlet weak var audioCurrent: UILabel!
-    @IBOutlet weak var audioTime: UILabel!
-    @IBOutlet weak var audioSlider: UISlider!
+
     @IBOutlet weak var playButton: UIButton!
 
     var player:AVAudioPlayer = AVAudioPlayer();
@@ -66,18 +65,9 @@ class MapPopupViewController: UIViewController {
         // Initialize audio
         self.isPaused = false;
         do {
-            // TODO: change audio to URL
-            let audioPath = Bundle.main.path(forResource: "audiofile", ofType: "mp3")
-            try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
-            audioSlider.maximumValue = Float(player.duration)
-            audioSlider.value = 0.0
-            audioTime.text = stringFromTimeInterval(interval: player.duration)
-            audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
-            //try player = AVAudioPlayer(contentsOf: url)
-            //let playerItem = AVPlayerItem(url: self.url)
-            
-            //try self.remotePlayer = AVPlayer(playerItem: playerItem)
-            //self.remotePlayer.volume = 1.0
+            let playerItem = AVPlayerItem(url: URL(string: soundURL!)!)
+            try self.remotePlayer = AVPlayer(playerItem: playerItem)
+            self.remotePlayer.volume = 1.0
         } catch {
         }
     }
@@ -89,6 +79,7 @@ class MapPopupViewController: UIViewController {
     
     // Close popup
     func dismissPopup() {
+        //remotePlayer.pause()
         dismiss(animated: true, completion: nil)
     }
 
@@ -96,23 +87,22 @@ class MapPopupViewController: UIViewController {
     /****** Audio ******/
     @IBAction func playAudioPressed(_ sender: Any) {
         if ( self.isPaused == false ) {
-            player.play()
+            remotePlayer.play()
             playButton.setImage(UIImage(named: "music-pause2"), for: .normal)
             self.isPaused = true
-            //audioSlider.value = Float(player.currentTime)
-            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
             RunLoop.main.add(timer, forMode: .commonModes)
         } else {
-            player.pause()
+            remotePlayer.pause()
             playButton.setImage(UIImage(named: "music-play2"), for: .normal)
             self.isPaused = false
             timer.invalidate()
         }
     }
     
-    @IBAction func slide(_ sender: Any) {
+    /*@IBAction func slide(_ sender: Any) {
         player.currentTime = TimeInterval(audioSlider.value)
-    }
+    }*/
     
     func stringFromTimeInterval(interval: TimeInterval) -> String {
         let interval = Int(interval)
@@ -121,15 +111,17 @@ class MapPopupViewController: UIViewController {
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    func updateSlider(_ timer: Timer) {
-        audioSlider.value = Float(player.currentTime)
-        audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
-        audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
-        if audioTime.text == "00:00" { // done
-            playButton.setImage(UIImage(named: "music-play2"), for: .normal)
-        }
+    func stringFromFloatCMTime(time: Double) -> String {
+        let intTime = Int(time)
+        let seconds = intTime % 60
+        let minutes = ( intTime / 60 ) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
     
+    func updateTime(_ timer: Timer) {
+        let currentTimeInSeconds = CMTimeGetSeconds((remotePlayer.currentItem?.currentTime())!)
+        audioCurrent.text = stringFromFloatCMTime(time: currentTimeInSeconds)
+    }
 
 
 }
