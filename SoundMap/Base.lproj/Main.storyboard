@@ -221,16 +221,6 @@
                                 <color key="textColor" red="0.43781725888324874" green="0.43303255792357448" blue="0.0086490418555692609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-1d-vLa">
-                                <rect key="frame" x="135" y="269" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadPhoto:" destination="N5T-jp-oKM" eventType="touchUpInside" id="aJh-MJ-Tf2"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" image="icons8-User-100" translatesAutoresizingMaskIntoConstraints="NO" id="Alm-nv-qHZ">
                                 <rect key="frame" x="85" y="124" width="150" height="150"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -252,6 +242,16 @@
                                 </state>
                                 <connections>
                                     <action selector="playAudioPressed:" destination="N5T-jp-oKM" eventType="touchUpInside" id="nhI-3B-R0r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-1d-vLa">
+                                <rect key="frame" x="132" y="269" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Change">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadPhoto:" destination="N5T-jp-oKM" eventType="touchUpInside" id="aJh-MJ-Tf2"/>
                                 </connections>
                             </button>
                         </subviews>
