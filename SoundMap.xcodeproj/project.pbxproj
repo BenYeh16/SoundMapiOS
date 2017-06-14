@@ -49,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CA142D61EF11FD100E6DE4E /* may1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = may1.m4a; sourceTree = "<group>"; };
+		0CA142D71EF11FD100E6DE4E /* may2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = may2.m4a; sourceTree = "<group>"; };
+		0CA142D81EF11FD100E6DE4E /* news.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = news.m4a; sourceTree = "<group>"; };
 		5E10C4681EE7EC4500E76AFB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E10C46A1EE8208800E76AFB /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		5E18437E1EEE4844006CE6D3 /* RecordInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordInfoViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +142,9 @@
 				E0CFD2B91EF035600098D17C /* SharedData.swift */,
 				E0A4A6471EE7E74000E41206 /* tex.jpg */,
 				E0A4A63C1EE7E6DF00E41206 /* audiofile.mp3 */,
+				0CA142D61EF11FD100E6DE4E /* may1.m4a */,
+				0CA142D71EF11FD100E6DE4E /* may2.m4a */,
+				0CA142D81EF11FD100E6DE4E /* news.m4a */,
 				E0A4A63D1EE7E6DF00E41206 /* audioplayer_pause.png */,
 				E0A4A63E1EE7E6DF00E41206 /* audioplayer_play.png */,
 				E0E954BB1EE7D82B009913B5 /* AppDelegate.swift */,
