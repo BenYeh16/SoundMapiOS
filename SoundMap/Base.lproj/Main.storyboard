@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0i1-3K-Rjj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0i1-3K-Rjj">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +41,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="KfU-e6-tus">
-                                <rect key="frame" x="40" y="124" width="240" height="128"/>
+                                <rect key="frame" x="40" y="80" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="6tJ-bU-afx"/>
                                     <constraint firstAttribute="height" constant="128" id="L82-RY-JEx"/>
@@ -170,6 +170,7 @@
                         <outlet property="activityIndicator" destination="Yjy-rg-UBJ" id="uq2-PU-h22"/>
                         <outlet property="passwordTextField" destination="OdC-7l-Jrz" id="vQt-R0-SGt"/>
                         <outlet property="userIDTextField" destination="yNH-u1-EwH" id="mQn-7a-D4G"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="backToLogin" id="goF-0W-By3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbJ-wh-ucR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,24 +215,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2:56" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jda-s1-47V" userLabel="timeElapsed">
-                                <rect key="frame" x="69" y="422" width="38" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BenYeh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmM-zU-GxJ">
+                                <rect key="frame" x="131" y="318" width="59.5" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" red="0.43781725888324874" green="0.43303255792357448" blue="0.0086490418555692609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" image="icons8-User-100" translatesAutoresizingMaskIntoConstraints="NO" id="Alm-nv-qHZ">
+                                <rect key="frame" x="85" y="124" width="150" height="150"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jda-s1-47V" userLabel="timeElapsed">
+                                <rect key="frame" x="128" y="448" width="65" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.36078431372549019" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hHN-kt-4iL" userLabel="audioSlider">
-                                <rect key="frame" x="105" y="417" width="147" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="minimumTrackTintColor" red="0.027450980390000001" green="0.2156862745" blue="0.38823529410000002" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" red="0.027450980390000001" green="0.2156862745" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="slide:" destination="N5T-jp-oKM" eventType="valueChanged" id="pAo-79-VkR"/>
-                                </connections>
-                            </slider>
                             <button autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTq-Op-56L" userLabel="audioPlayButton">
-                                <rect key="frame" x="30" y="414" width="37" height="37"/>
+                                <rect key="frame" x="142" y="403" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="music-play"/>
@@ -242,33 +244,16 @@
                                     <action selector="playAudioPressed:" destination="N5T-jp-oKM" eventType="touchUpInside" id="nhI-3B-R0r"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-0:37" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkL-5x-6kP" userLabel="timeDuration">
-                                <rect key="frame" x="258" y="422" width="36" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.23529411764705882" green="0.36078431372549019" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BenYeh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmM-zU-GxJ">
-                                <rect key="frame" x="131" y="318" width="59.5" height="21"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="textColor" red="0.43781725888324874" green="0.43303255792357448" blue="0.0086490418555692609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-1d-vLa">
-                                <rect key="frame" x="135" y="269" width="50" height="30"/>
+                                <rect key="frame" x="132" y="269" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload">
+                                <state key="normal" title="Change">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="uploadPhoto:" destination="N5T-jp-oKM" eventType="touchUpInside" id="aJh-MJ-Tf2"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" image="icons8-User-100" translatesAutoresizingMaskIntoConstraints="NO" id="Alm-nv-qHZ">
-                                <rect key="frame" x="85" y="124" width="150" height="150"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -286,8 +271,6 @@
                     <navigationItem key="navigationItem" title="Profile" id="Lnz-wu-lv5"/>
                     <connections>
                         <outlet property="audioCurrent" destination="jda-s1-47V" id="cSW-Sc-vIJ"/>
-                        <outlet property="audioSlider" destination="hHN-kt-4iL" id="sKL-mP-dVh"/>
-                        <outlet property="audioTime" destination="IkL-5x-6kP" id="SlE-5w-uuP"/>
                         <outlet property="playButton" destination="ZTq-Op-56L" id="KEi-VI-Oyp"/>
                         <outlet property="profileImage" destination="Alm-nv-qHZ" id="wL5-lD-wKs"/>
                         <outlet property="uploadButton" destination="fZ0-1d-vLa" id="yTb-5Q-Lto"/>
@@ -790,6 +773,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eAU-XH-rDE"/>
+        <segue reference="goF-0W-By3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.027450980390000001" green="0.2156862745" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
