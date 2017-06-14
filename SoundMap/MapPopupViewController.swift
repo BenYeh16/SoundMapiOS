@@ -125,6 +125,9 @@ class MapPopupViewController: UIViewController {
         audioSlider.value = Float(player.currentTime)
         audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
         audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
+        if audioTime.text == "00:00" { // done
+            playButton.setImage(UIImage(named: "music-play2"), for: .normal)
+        }
     }
     
 
