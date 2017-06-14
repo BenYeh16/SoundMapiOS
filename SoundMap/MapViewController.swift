@@ -15,7 +15,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
-
+    
+    @IBAction func PinBtn(_ sender: Any) {
+        currentLocation = locationManager.location!
+        showAlert(title: "PinBtn Pushed", message: "Pining a pin on current location", btnstr: "Close Alert GCD")
+        
+        
+        longitudeLabel.text = "\(currentLocation.coordinate.longitude)"
+        latitudeLabel.text = "\(currentLocation.coordinate.latitude)"
+        
+        let circle = MKCircle(center: currentLocation.coordinate, radius: 300)
+        mapView.add(circle)
+        
+        let nowAnnotation = MKPointAnnotation()
+        nowAnnotation.coordinate = currentLocation.coordinate;
+        nowAnnotation.title = "Now";
+        mapView.addAnnotation(nowAnnotation)
+        
+    }
+    
     var locationManager = CLLocationManager()
     var currentLocation = CLLocation()
     
@@ -36,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // 4. 加入測試數據
         setupData()
         // Do any additional setup after loading the view, typically from a nib.
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.PinBtn(_:)),name:NSNotification.Name(rawValue: "stopSoundNotification"), object: nil)
     }
     
     
