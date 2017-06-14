@@ -17,8 +17,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var uploadButton: UIButton!
     
     @IBOutlet weak var audioCurrent: UILabel!
-    @IBOutlet weak var audioTime: UILabel!
-    @IBOutlet weak var audioSlider: UISlider!
     @IBOutlet weak var playButton: UIButton!
     
     var player:AVAudioPlayer = AVAudioPlayer();
@@ -62,7 +60,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         do {
             try remotePlayer = AVPlayer(playerItem: playerItem)
             self.remotePlayer.volume = 1.0
-            print ("url:\(url)")
         } catch {
             print ("Can't load user audio")
         }
@@ -91,22 +88,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.profileImage.layer.borderColor = UIColor(red: 86/255, green: 86/255, blue: 1/255, alpha: 1).cgColor
         
         
-        self.isPaused = false;
-        do {
-            let audioPath = Bundle.main.path(forResource: "audiofile", ofType: "mp3")
-            try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
-            audioSlider.maximumValue = Float(player.duration)
-            audioSlider.value = 0.0
-            //audioTime.text = stringFromTimeInterval(interval: player.duration)
-            //audioCurrent.text = stringFromTimeInterval(interval: player.currentTime)
-            //try player = AVAudioPlayer(contentsOf: url)
-            //let playerItem = AVPlayerItem(url: self.url)
-            
-            //try self.remotePlayer = AVPlayer(playerItem: playerItem)
-            //self.remotePlayer.volume = 1.0
-        } catch {
-        }
-        
         // 1. Load Profile Picture
         
         loadProfilePic();
@@ -127,17 +108,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     /****** Audio ******/
     @IBAction func playAudioPressed(_ sender: Any) {
         if ( self.isPaused == false ) {
             remotePlayer.play()
             playButton.setImage(UIImage(named: "music-pause"), for: .normal)
             self.isPaused = true
-            //audioSlider.value = stringFromCMTime(CMTimeGetSeconds(remotePlayer.currentTime()))
-            //audioSlider.
-            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+            timer = Timer(timeInterval: 1.0, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
             RunLoop.main.add(timer, forMode: .commonModes)
         } else {
             remotePlayer.pause()
@@ -147,10 +124,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
 
-    @IBAction func slide(_ sender: Any) {
-         //remotePlayer.currentItem?. = TimeInterval(audioSlider.value)
-    }
-    
     func stringFromTimeInterval(interval: TimeInterval) -> String {
         let interval = Int(interval)
         let seconds = interval % 60
@@ -158,17 +131,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    /*func stringFromCMTime(time: Float) -> String {
-        let totalTime = Int(time)
-        let minutes = floor( totalTime % 3600 / 60 );
-        let seconds = floor( totalTime % 3600 % 60 );
+    func stringFromFloatCMTime(time: Double) -> String {
+        let intTime = Int(time)
+        let seconds = intTime % 60
+        let minutes = (intTime / 60) % 60
         return String(format: "%02d:%02d", minutes, seconds)
-    }*/
+    }
     
-    func updateSlider(_ timer: Timer) {
-        //audioSlider.value = Float(player.currentTime)
-        audioCurrent.text = String(describing: CMTimeCopyDescription(nil, remotePlayer.currentTime())!)
-        //audioTime.text = stringFromTimeInterval(interval: player.duration - player.currentTime)
+    func updateTime(_ timer: Timer) {
+        let currentTimeInSeconds = CMTimeGetSeconds((remotePlayer.currentItem?.currentTime())!)
+        audioCurrent.text = stringFromFloatCMTime(time: currentTimeInSeconds)
     }
     
     
@@ -183,19 +155,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.picker.popoverPresentationController?.sourceView = uploadButton!
         
     }
-    
-    // Upload photo from taken picture
-    /*@IBAction func shootPhoto(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            picker.allowsEditing = false
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-            picker.cameraCaptureMode = .photo
-            picker.modalPresentationStyle = .fullScreen
-            present(picker,animated: true,completion: nil)
-        } else {
-            noCamera()
-        }
-    }*/
     
     // Pick image
     func imagePickerController(_ picker: UIImagePickerController,
